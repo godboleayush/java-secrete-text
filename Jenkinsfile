@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
              steps {
                 script {
-                    if (PORT == 8000) {
+                    if (PORT == '8000') {
                         echo "Everything is fine"
                     } else {
                         echo "Port is not 8000, something is not fine"
