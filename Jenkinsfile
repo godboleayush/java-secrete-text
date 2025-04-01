@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
     agent any
 
@@ -7,21 +9,28 @@ pipeline {
     }
 
     stages {
+
+        stage('init'){
+            steps{
+                script{
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
         stage('Build') {
              steps {
                 script {
-                    if (PORT == '8000') {
-                        echo "Everything is fine"
-                    } else {
-                        echo "Port is not 8000, something is not fine"
-                    }
+                    gv.buildApp()
                 }
              }
         }
 
         stage('Deploy') {
             steps {
-                echo "deploy reached"
+                script{
+                    gv.deployApp()
+                }
             }
         }
     }
